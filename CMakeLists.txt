@@ -7,7 +7,13 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
 
 # Add your executable
-add_executable(Rpggame main.cpp)
+add_executable(Rpggame main.cpp
+        Player.cpp
+        Player.h
+        Skeleton.cpp
+        Skeleton.h
+        Math.cpp
+        Math.h)
 
 # Link SFML libraries
 target_link_libraries(Rpggame sfml-graphics sfml-window sfml-system sfml-audio)

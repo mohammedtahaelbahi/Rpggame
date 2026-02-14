@@ -30,22 +30,22 @@ void Player::Load() {
 
 }
 
-void Player::Update(Skeleton& skeleton) {
+void Player::Update(float deltaTime,Skeleton& skeleton) {
     sf::Vector2f position = sprite.getPosition();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        sprite.setPosition(position + sf::Vector2f(0.5f,0));
+        sprite.setPosition(position + sf::Vector2f(0.5f,0)*playerSpeed*deltaTime);
 
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        sprite.setPosition(position + sf::Vector2f(-0.5f,0));
+        sprite.setPosition(position + sf::Vector2f(-0.5f,0)*playerSpeed*deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        sprite.setPosition(position + sf::Vector2f(0,-0.5f));
+        sprite.setPosition(position + sf::Vector2f(0,-0.5f)*playerSpeed*deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::
         S)) {
-        sprite.setPosition(position + sf::Vector2f(0,0.5f));
+        sprite.setPosition(position + sf::Vector2f(0,0.5f)*playerSpeed*deltaTime);
         }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         bullets.push_back(sf::RectangleShape(sf::Vector2f(50,25)));
@@ -57,12 +57,13 @@ void Player::Update(Skeleton& skeleton) {
     for (size_t i = 0; i < bullets.size(); i++) {
         sf::Vector2f BullerDirection = skeleton.sprite.getPosition() - bullets[i].getPosition();
         BullerDirection = Math::normalizeVector(BullerDirection);
-        bullets[i].setPosition(bullets[i].getPosition()+ BullerDirection * SpeedBullet );
+        bullets[i].setPosition(bullets[i].getPosition()+ BullerDirection * SpeedBullet*deltaTime );
     }
     boundingRectangle.setPosition(sprite.getPosition());
    if (Math::CheckRectCollision(sprite.getGlobalBounds(),skeleton.sprite.getGlobalBounds())) {
        std::cout << "Tlas9na : )" << std::endl;
    }
+
 }
 
 void Player::Draw(sf::RenderWindow& window) {

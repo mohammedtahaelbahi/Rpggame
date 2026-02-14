@@ -6,12 +6,9 @@ int main() {
     // ------ Initiale-------
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
-    sf::RenderWindow window(sf::VideoMode(1920,1080), "Rpg Game",sf::Style::Default,settings);
-    // ------ Initiale-------
-
+    sf::RenderWindow window(sf::VideoMode(1000,700), "Rpg Game",sf::Style::Default,settings);
     Player player;
     Skeleton skeleton;
-    // ------ Initiale-------
     player.Initialize();
     skeleton.Initialize();
     // ------ Load-------
@@ -28,6 +25,7 @@ int main() {
         }
         skeleton.Update();
         player.Update(skeleton);
+
 
 
 //------------------------------------------------------------------------Update

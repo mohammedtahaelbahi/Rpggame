@@ -8,8 +8,11 @@ class Skeleton {
 
 private:
     sf::Texture texture;
+sf::RectangleShape boundingRectangle;
+    sf::Vector2i size;
 public:
     sf::Sprite sprite;
+
 public:
     void Initialize();
     void Load();

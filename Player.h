@@ -11,6 +11,8 @@ private:
     std::vector<sf::RectangleShape> bullets;
     [[maybe_unused]] float SpeedBullet = 0.1f;
     sf::Texture texture;
+    sf::RectangleShape boundingRectangle;
+    sf::Vector2i size;
 public:
     sf::Sprite sprite;
 public:

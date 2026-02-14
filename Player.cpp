@@ -3,19 +3,25 @@
 #include "Math.h"
 
 void Player::Initialize() {
+    boundingRectangle.setFillColor(sf::Color::Transparent);
+    boundingRectangle.setOutlineColor(sf::Color::Red);
+    boundingRectangle.setOutlineThickness(1);
+    size.x = 64; size.y = 64;
+
 
 }
 
 void Player::Load() {
     if(texture.loadFromFile("Assets/Player/Textures/spritesheet.png")) {
         sprite.setTexture(texture);
-        int XIndex{0}, YIndex{3};
+        int XIndex{3}, YIndex{3};
 
 
         std::cout <<"Image player loaded\n";
-        sprite.setTextureRect(sf::IntRect(XIndex *64 ,YIndex * 64,64,64));
-
+        sprite.setTextureRect(sf::IntRect(XIndex * size.x ,YIndex * size.y,size.x,size.y));
         sprite.scale(sf::Vector2f(2,2));
+        boundingRectangle.setSize(sf::Vector2f(size.x * sprite.getScale().x,size.y * sprite.getScale().y));
+
     }
     else {
         std::cout <<"Image player texture could not be loaded\n";
@@ -29,6 +35,7 @@ void Player::Update(Skeleton& skeleton) {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         sprite.setPosition(position + sf::Vector2f(0.5f,0));
+
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
         sprite.setPosition(position + sf::Vector2f(-0.5f,0));
@@ -45,16 +52,22 @@ void Player::Update(Skeleton& skeleton) {
         int i = bullets.size()-1;
         bullets[i].setPosition(sprite.getPosition());
 
+
     }
     for (size_t i = 0; i < bullets.size(); i++) {
         sf::Vector2f BullerDirection = skeleton.sprite.getPosition() - bullets[i].getPosition();
         BullerDirection = Math::normalizeVector(BullerDirection);
         bullets[i].setPosition(bullets[i].getPosition()+ BullerDirection * SpeedBullet );
     }
+    boundingRectangle.setPosition(sprite.getPosition());
+   if (Math::CheckRectCollision(sprite.getGlobalBounds(),skeleton.sprite.getGlobalBounds())) {
+       std::cout << "Tlas9na : )" << std::endl;
+   }
 }
 
 void Player::Draw(sf::RenderWindow& window) {
     window.draw(sprite);
+    window.draw(boundingRectangle);
     for (size_t i = 0; i < bullets.size(); i++) {
         window.draw(bullets[i]);
     }

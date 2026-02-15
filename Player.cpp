@@ -2,6 +2,13 @@
 #include <iostream>
 #include "Math.h"
 
+Player::Player() :
+ SpeedBullet (0.2f) , playerSpeed (2.0f){
+}
+
+Player::~Player() {
+}
+
 void Player::Initialize() {
     boundingRectangle.setFillColor(sf::Color::Transparent);
     boundingRectangle.setOutlineColor(sf::Color::Red);

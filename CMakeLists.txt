@@ -13,7 +13,9 @@ add_executable(Rpggame main.cpp
         Skeleton.cpp
         Skeleton.h
         Math.cpp
-        Math.h)
+        Math.h
+        FrameRate.cpp
+        FrameRate.h)
 
 # Link SFML libraries
 target_link_libraries(Rpggame sfml-graphics sfml-window sfml-system sfml-audio)

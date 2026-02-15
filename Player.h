@@ -9,14 +9,17 @@
 class Player {
 private:
     std::vector<sf::RectangleShape> bullets;
-    float SpeedBullet = 0.1f;
+    float SpeedBullet;
+    float playerSpeed;
     sf::Texture texture;
     sf::RectangleShape boundingRectangle;
     sf::Vector2i size;
-    float playerSpeed = 2.0f;
+
 public:
     sf::Sprite sprite;
 public:
+    Player();
+    ~Player();
     void Initialize();
     void Load();
     void Update(float deltaTime , Skeleton& skeleton);

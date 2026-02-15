@@ -1,7 +1,7 @@
 #include "Skeleton.h"
 #include <iostream>
 
-Skeleton::Skeleton() {
+Skeleton::Skeleton() : health(100) {
 }
 
 Skeleton::~Skeleton() {
@@ -15,6 +15,18 @@ void Skeleton::Initialize() {
 }
 
 void Skeleton::Load() {
+
+    if (font.loadFromFile("Assets/Fonts/ArialCE.ttf")) {
+        std::cout<<"Font loaded ArialCE.ttf from Assets"<<std::endl;
+        HealthText.setFont(font);
+    }
+    else {
+        std::cout<<"Font not loaded from Assets"<<std::endl;
+    }
+
+
+
+
     if (texture.loadFromFile("Assets/Skeleton/Textures/spritesheet.png")){
         std::cout <<"Image enemy loaded\n";
         sprite.setTexture(texture);
@@ -30,14 +42,19 @@ void Skeleton::Load() {
         std::cout <<"Image enemy texture could not be loaded\n";
     }
     sprite.setPosition(sf::Vector2f(600,400));
+    HealthText.setPosition(sprite.getPosition());
 
 }
 
 void Skeleton::Update(float deltaTime) {
     boundingRectangle.setPosition(sprite.getPosition());
+    HealthText.setString(std::to_string(health));
+    HealthText.setPosition(sprite.getPosition());
+
 }
 
 void Skeleton::Draw(sf::RenderWindow& window) {
     window.draw(sprite);
     window.draw(boundingRectangle);
+    window.draw(HealthText);
 }

@@ -12,6 +12,9 @@ sf::RectangleShape boundingRectangle;
     sf::Vector2i size;
 public:
     sf::Sprite sprite;
+    int health;
+    sf::Text HealthText;
+    sf::Font font;
 
 public:
     Skeleton();

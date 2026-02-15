@@ -3,7 +3,7 @@
 #include "Math.h"
 
 Player::Player() :
- SpeedBullet (0.2f) , playerSpeed (2.0f){
+ SpeedBullet (0.2f) , playerSpeed (2.0f) , FireRate(150.f), FireRateTimer(0){
 }
 
 Player::~Player() {
@@ -54,22 +54,43 @@ void Player::Update(float deltaTime,Skeleton& skeleton) {
         S)) {
         sprite.setPosition(position + sf::Vector2f(0,0.5f)*playerSpeed*deltaTime);
         }
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+
+    //----------------------------------------------------
+
+    FireRateTimer += deltaTime;
+
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && FireRateTimer > FireRate) {
         bullets.push_back(sf::RectangleShape(sf::Vector2f(50,25)));
         int i = bullets.size()-1;
         bullets[i].setPosition(sprite.getPosition());
-
+        FireRateTimer = 0;
 
     }
     for (size_t i = 0; i < bullets.size(); i++) {
-        sf::Vector2f BullerDirection = skeleton.sprite.getPosition() - bullets[i].getPosition();
+        sf::FloatRect skeletonbounds = skeleton.sprite.getGlobalBounds();
+
+        // Put the bullets in center of skeleton
+        sf::Vector2f skeletoncenter{skeletonbounds.left+ skeletonbounds.width /2.0f , skeletonbounds.top +skeletonbounds.height/2.0f };
+        sf::Vector2f BullerDirection = skeletoncenter - bullets[i].getPosition();
         BullerDirection = Math::normalizeVector(BullerDirection);
+        // change the origin of bullets
+        bullets[i].setOrigin(bullets[i].getSize()/2.0f);
         bullets[i].setPosition(bullets[i].getPosition()+ BullerDirection * SpeedBullet*deltaTime );
+
+        if (Math::CheckRectCollision(bullets[i].getGlobalBounds(),skeleton.sprite.getGlobalBounds())) {
+            bullets.erase(bullets.begin()+i);
+            skeleton.health -=10;
+            std::cout <<"Skeleton Health : " <<  skeleton.health << std::endl;
+
+
+        }
+
     }
+
+    //----------------------------------------------------
+
     boundingRectangle.setPosition(sprite.getPosition());
-   if (Math::CheckRectCollision(sprite.getGlobalBounds(),skeleton.sprite.getGlobalBounds())) {
-       std::cout << "Tlas9na : )" << std::endl;
-   }
 
 }
 

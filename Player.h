@@ -10,6 +10,8 @@ class Player {
 private:
     std::vector<sf::RectangleShape> bullets;
     float SpeedBullet;
+    float FireRate;
+    float FireRateTimer;
     float playerSpeed;
     sf::Texture texture;
     sf::RectangleShape boundingRectangle;

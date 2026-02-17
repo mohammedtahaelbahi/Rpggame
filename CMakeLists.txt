@@ -17,7 +17,9 @@ add_executable(Rpggame main.cpp
         FrameRate.cpp
         FrameRate.h
         Bullet.cpp
-        Bullet.h)
+        Bullet.h
+        Map.cpp
+        Map.h)
 
 # Link SFML libraries
 target_link_libraries(Rpggame sfml-graphics sfml-window sfml-system sfml-audio)

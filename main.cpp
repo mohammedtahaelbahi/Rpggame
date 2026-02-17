@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Map.h"
 #include "FrameRate.h"
 #include "Player.h"
 #include "Skeleton.h"
@@ -9,19 +10,22 @@ int main() {
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920,1080), "Rpg Game",sf::Style::Default,settings);
     window.setVerticalSyncEnabled(true);
+    Map map;
     Player player;
     Skeleton skeleton;
     FrameRate framerate;
     player.Initialize();
     skeleton.Initialize();
     framerate.Initialize();
+    map.Initialize();
 
 
     // ------ Load-------
+
     player.Load();
     skeleton.Load();
     framerate.Load();
-
+    map.Load();
 
     // ------ Load-------
 //---------------------------------------------------------------------main game loop
@@ -43,12 +47,13 @@ int main() {
         skeleton.Update(deltaTime);
         player.Update(deltaTime,skeleton,mousePosition);
         framerate.Update(deltaTime);
-
+        map.Update(deltaTime);
 
 
 //------------------------------------------------------------------------Update
         //-------Draw-----
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::Red);
+        map.Draw(window);
         player.Draw(window);
         skeleton.Draw(window);
         framerate.Draw(window);

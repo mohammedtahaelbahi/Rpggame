@@ -3,7 +3,7 @@
 #include "Math.h"
 
 Player::Player() :
- SpeedBullet (0.2f) , playerSpeed (2.0f) , FireRate(150.f), FireRateTimer(0){
+ playerSpeed (2.0f) , FireRate(150.f), FireRateTimer(0){
 }
 
 Player::~Player() {
@@ -37,7 +37,7 @@ void Player::Load() {
 
 }
 
-void Player::Update(float deltaTime,Skeleton& skeleton) {
+void Player::Update(float deltaTime,Skeleton& skeleton,sf::Vector2f& mousePosition) {
     sf::Vector2f position = sprite.getPosition();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -61,31 +61,30 @@ void Player::Update(float deltaTime,Skeleton& skeleton) {
 
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && FireRateTimer > FireRate) {
-        bullets.push_back(sf::RectangleShape(sf::Vector2f(50,25)));
+        bullets.push_back(Bullet());
         int i = bullets.size()-1;
-        bullets[i].setPosition(sprite.getPosition());
+        bullets[i].Initialize(sprite.getPosition(),mousePosition,0.5f);
         FireRateTimer = 0;
 
     }
     for (size_t i = 0; i < bullets.size(); i++) {
-        sf::FloatRect skeletonbounds = skeleton.sprite.getGlobalBounds();
-
-        // Put the bullets in center of skeleton
-        sf::Vector2f skeletoncenter{skeletonbounds.left+ skeletonbounds.width /2.0f , skeletonbounds.top +skeletonbounds.height/2.0f };
-        sf::Vector2f BullerDirection = skeletoncenter - bullets[i].getPosition();
-        BullerDirection = Math::normalizeVector(BullerDirection);
-        // change the origin of bullets
-        bullets[i].setOrigin(bullets[i].getSize()/2.0f);
-        bullets[i].setPosition(bullets[i].getPosition()+ BullerDirection * SpeedBullet*deltaTime );
-
-        if (Math::CheckRectCollision(bullets[i].getGlobalBounds(),skeleton.sprite.getGlobalBounds())) {
-            bullets.erase(bullets.begin()+i);
-            skeleton.health -=10;
-            std::cout <<"Skeleton Health : " <<  skeleton.health << std::endl;
 
 
+        bullets[i].Update(deltaTime);
+
+
+        if (skeleton.health >0)
+        {
+            if (Math::CheckRectCollision(bullets[i].GetGlobalBounds(),skeleton.sprite.getGlobalBounds()))
+                {
+                skeleton.ChangeHealth(-10);
+                bullets.erase(bullets.begin()+i);
+
+                std::cout <<"Skeleton Health : " <<  skeleton.health << std::endl;
+
+
+            }
         }
-
     }
 
     //----------------------------------------------------
@@ -98,6 +97,6 @@ void Player::Draw(sf::RenderWindow& window) {
     window.draw(sprite);
     window.draw(boundingRectangle);
     for (size_t i = 0; i < bullets.size(); i++) {
-        window.draw(bullets[i]);
+        bullets[i].Draw(window);
     }
 }

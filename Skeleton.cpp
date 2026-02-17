@@ -7,6 +7,11 @@ Skeleton::Skeleton() : health(100) {
 Skeleton::~Skeleton() {
 }
 
+void Skeleton::ChangeHealth(int hp) {
+    health +=hp;
+    HealthText.setString(std::to_string(health));
+}
+
 void Skeleton::Initialize() {
     boundingRectangle.setFillColor(sf::Color::Transparent);
     boundingRectangle.setOutlineColor(sf::Color::Blue);
@@ -25,6 +30,7 @@ void Skeleton::Load() {
     }
 
 
+    HealthText.setString(std::to_string(health));
 
 
     if (texture.loadFromFile("Assets/Skeleton/Textures/spritesheet.png")){
@@ -47,14 +53,18 @@ void Skeleton::Load() {
 }
 
 void Skeleton::Update(float deltaTime) {
-    boundingRectangle.setPosition(sprite.getPosition());
-    HealthText.setString(std::to_string(health));
-    HealthText.setPosition(sprite.getPosition());
+    if (health>0)
+    {
+        boundingRectangle.setPosition(sprite.getPosition());
+        HealthText.setPosition(sprite.getPosition());
+    }
 
 }
 
 void Skeleton::Draw(sf::RenderWindow& window) {
-    window.draw(sprite);
-    window.draw(boundingRectangle);
-    window.draw(HealthText);
+    if (health>0) {
+        window.draw(sprite);
+        window.draw(boundingRectangle);
+        window.draw(HealthText);
+    }
 }

@@ -1,15 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Skeleton.h"
-
+#include "Bullet.h"
 #ifndef RPGGAME_PLAYER_H
 #define RPGGAME_PLAYER_H
 
 
 class Player {
 private:
-    std::vector<sf::RectangleShape> bullets;
-    float SpeedBullet;
+    std::vector<Bullet> bullets;
     float FireRate;
     float FireRateTimer;
     float playerSpeed;
@@ -24,7 +23,7 @@ public:
     ~Player();
     void Initialize();
     void Load();
-    void Update(float deltaTime , Skeleton& skeleton);
+    void Update(float deltaTime , Skeleton& skeleton,sf::Vector2f& mousePosition);
     void Draw(sf::RenderWindow& window);
 };
 

@@ -19,6 +19,7 @@ public:
 public:
     Skeleton();
     ~Skeleton();
+    void ChangeHealth(int hp);
     void Initialize();
     void Load();
     void Update(float deltaTime);

@@ -20,7 +20,7 @@ void FrameRate::Load() {
     }
 }
 
-void FrameRate::Update(double deltaTime) {
+void FrameRate::Update(float deltaTime) {
      time += deltaTime;
     if (time >= 100.0) {
         int fps = 1000.0 / deltaTime;

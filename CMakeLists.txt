@@ -19,7 +19,8 @@ add_executable(Rpggame main.cpp
         Bullet.cpp
         Bullet.h
         Map.cpp
-        Map.h)
+        Map.h
+        Tile.h)
 
 # Link SFML libraries
 target_link_libraries(Rpggame sfml-graphics sfml-window sfml-system sfml-audio)

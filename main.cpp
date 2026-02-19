@@ -6,6 +6,13 @@
 #include "Skeleton.h"
 int main() {
     // ------ Initiale-------
+
+
+
+
+
+
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920,1080), "Rpg Game",sf::Style::Default,settings);
@@ -52,7 +59,7 @@ int main() {
 
 //------------------------------------------------------------------------Update
         //-------Draw-----
-        window.clear(sf::Color::Red);
+        window.clear(sf::Color::Green);
         map.Draw(window);
         player.Draw(window);
         skeleton.Draw(window);

@@ -13,13 +13,16 @@ private:
     sf::Texture TileSheetTexture;
     sf::Vector2i size;
     int TotalTilesX , TotalTilesY;
-    Tile *tiles = nullptr;
+    Tile *tiles;
     int TotalTiles;
-    int mapNumbers[6] = {
+    static const int mapSize = 6;
+    int mapWidth ;
+    int mapHeight;
+    int mapNumbers[mapSize] = {
         101,102,103,
         5,5,5
     };
-    sf::Sprite mapSprite[6];
+    sf::Sprite mapSprite[mapSize];
 
 public:
     Map();

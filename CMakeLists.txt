@@ -8,19 +8,24 @@ find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
 
 # Add your executable
 add_executable(Rpggame main.cpp
-        Player.cpp
-        Player.h
-        Skeleton.cpp
-        Skeleton.h
-        Math.cpp
-        Math.h
-        FrameRate.cpp
-        FrameRate.h
-        Bullet.cpp
-        Bullet.h
-        Map.cpp
-        Map.h
-        Tile.h)
+        Src/Player.cpp
+        Src/Player.h
+        Src/Skeleton.cpp
+        Src/Skeleton.h
+        Src/Math.cpp
+        Src/Math.h
+        Src/FrameRate.cpp
+        Src/FrameRate.h
+        Src/Bullet.cpp
+        Src/Bullet.h
+        Src/Map.cpp
+        Src/Map.h
+        Src/Tile.h
+        Src/MapLoader.cpp
+        Src/MapLoader.h)
+
+# So #include "Player.h" still works from anywhere
+include_directories(Src)
 
 # Link SFML libraries
 target_link_libraries(Rpggame sfml-graphics sfml-window sfml-system sfml-audio)

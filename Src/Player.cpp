@@ -80,9 +80,6 @@ void Player::Update(float deltaTime,Skeleton& skeleton,sf::Vector2f& mousePositi
                 skeleton.ChangeHealth(-10);
                 bullets.erase(bullets.begin()+i);
 
-                std::cout <<"Skeleton Health : " <<  skeleton.health << std::endl;
-
-
             }
         }
     }

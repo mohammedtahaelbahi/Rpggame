@@ -4,6 +4,7 @@
 #include "FrameRate.h"
 #include "Player.h"
 #include "Skeleton.h"
+#include "Src/MapLoader.h"
 int main() {
     // ------ Initiale-------
 
@@ -21,6 +22,9 @@ int main() {
     Player player;
     Skeleton skeleton;
     FrameRate framerate;
+    MapLoader file;
+
+
     player.Initialize();
     skeleton.Initialize();
     framerate.Initialize();
@@ -33,6 +37,7 @@ int main() {
     skeleton.Load();
     framerate.Load();
     map.Load();
+    file.Load("Assets/Maps/Level1.rmap");
 
     // ------ Load-------
 //---------------------------------------------------------------------main game loop

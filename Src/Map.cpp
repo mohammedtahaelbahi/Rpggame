@@ -12,10 +12,10 @@ Map::~Map() {
 void Map::Initialize() {
 }
 
-void Map::Load() {
+void Map::Load(std::string filename) {
 
 
-    mapLoader.Load("Assets/Maps/Level1.rmap",md);
+    mapLoader.Load(filename,md);
     std::cerr << md.dataLength << std::endl;
     mapSprite = new sf::Sprite[md.dataLength];
 

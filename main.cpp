@@ -30,7 +30,7 @@ int main() {
     player.Load();
     skeleton.Load();
     framerate.Load();
-    map.Load();
+    map.Load("Assets/Maps/Level1.rmap");
 
 
     // ------ Load-------

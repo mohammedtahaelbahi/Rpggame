@@ -29,7 +29,7 @@ public:
     Map();
     ~Map();
     void Initialize();
-    void Load();
+    void Load(std::string filename);
     void Update(float deltaTime);
     void Draw(sf::RenderWindow& window);
 };

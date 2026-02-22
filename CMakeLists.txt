@@ -22,7 +22,8 @@ add_executable(Rpggame main.cpp
         Src/Map.h
         Src/Tile.h
         Src/MapLoader.cpp
-        Src/MapLoader.h)
+        Src/MapLoader.h
+        Src/MapData.h)
 
 # So #include "Player.h" still works from anywhere
 include_directories(Src)

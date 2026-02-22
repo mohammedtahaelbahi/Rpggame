@@ -1,8 +1,12 @@
 [Map]
-tilesheet = "/home/elbahi/CLionProjects/RpggameGit/Assets/World/Prison/Prison.png"
-name = Level 1
-tile-width = 16
-tile-height = 16
-scale-x = 5
-scale-y = 5
-data = 120,121,122,144,145,146
+version=1
+tilesheet=Assets/World/Prison/Prison.png
+name=Level 1
+tileWidth=16
+tileHeight=16
+mapWidth=4
+mapHeight=2
+scaleX=5
+scaleY=5
+dataLength=8
+data=120,121,122,144,145,146,147,148,;

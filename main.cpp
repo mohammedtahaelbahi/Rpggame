@@ -4,25 +4,18 @@
 #include "FrameRate.h"
 #include "Player.h"
 #include "Skeleton.h"
-#include "Src/MapLoader.h"
+#include "MapLoader.h"
 int main() {
     // ------ Initiale-------
-
-
-
-
-
-
-
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920,1080), "Rpg Game",sf::Style::Default,settings);
-    window.setVerticalSyncEnabled(true);
+    window.setVerticalSyncEnabled(true); //144fps
     Map map;
     Player player;
     Skeleton skeleton;
     FrameRate framerate;
-    MapLoader file;
+
 
 
     player.Initialize();
@@ -31,13 +24,14 @@ int main() {
     map.Initialize();
 
 
+
     // ------ Load-------
 
     player.Load();
     skeleton.Load();
     framerate.Load();
     map.Load();
-    file.Load("Assets/Maps/Level1.rmap");
+
 
     // ------ Load-------
 //---------------------------------------------------------------------main game loop
@@ -64,7 +58,7 @@ int main() {
 
 //------------------------------------------------------------------------Update
         //-------Draw-----
-        window.clear(sf::Color::Green);
+        window.clear(sf::Color::Black);
         map.Draw(window);
         player.Draw(window);
         skeleton.Draw(window);

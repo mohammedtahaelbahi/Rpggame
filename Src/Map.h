@@ -1,6 +1,6 @@
 #pragma once
 #include "Tile.h"
-
+#include "MapLoader.h"
 #include <SFML/Graphics.hpp>
 
 #ifndef RPGGAME_MAP_H
@@ -10,19 +10,20 @@
 class Map {
 
 private:
+
+    map_data md; //mapdata = md
+    MapLoader mapLoader;
+
+
+
+
     sf::Texture TileSheetTexture;
-    sf::Vector2i size;
     int TotalTilesX , TotalTilesY;
     Tile *tiles;
     int TotalTiles;
-    static const int mapSize = 6;
-    int mapWidth ;
-    int mapHeight;
-    int mapNumbers[mapSize] = {
-        101,102,103,
-        5,5,5
-    };
-    sf::Sprite mapSprite[mapSize];
+
+
+    sf::Sprite *mapSprite;
 
 public:
     Map();
